@@ -29,8 +29,8 @@ jobs:
       with:
         context: .
         push: true
-        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/Docker-React:latest
+        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/docker-react:latest
 
     - name: Run tests
       run: |
-        docker run --rm ${{ secrets.DOCKER_HUB_USERNAME }}/Docker-React:latest npm test
+        docker run --rm ${{ secrets.DOCKER_HUB_USERNAME }}/docker-react:latest npm test
