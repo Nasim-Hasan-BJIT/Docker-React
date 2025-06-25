@@ -1,9 +1,23 @@
-FROM node:lts-alpine as builder
-WORKDIR '/app'
-COPY package.json .
-RUN npm install
-COPY . .
-RUN npm run build
+# Use an official Node.js runtime as a parent image
+FROM node:14
 
-FROM nginx
-COPY --from=builder /app/build /usr/share/nginx/html
+# Set the working directory in the container
+WORKDIR /usr/src/app
+
+# Copy package.json and package-lock.json
+COPY package*.json ./
+
+# Install any dependencies
+RUN npm install
+
+# Bundle app source
+COPY . .
+
+# Define environment variable
+ENV NODE_ENV=production
+
+# Expose port
+EXPOSE 8080
+
+# Run the application
+CMD ["node", "app.js"]
